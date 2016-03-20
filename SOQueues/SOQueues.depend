@@ -10,3 +10,14 @@
 	<stdio.h>
 	"fila2.h"
 
+1458494344 source:/home/aluno/Área de Trabalho/sisop_a1/SOQueues/SOQueues/src/bfila.c
+	<stdio.h>
+	<stdlib.h>
+	"../include/fila2.h"
+
+1458001256 /home/aluno/Área de Trabalho/sisop_a1/SOQueues/SOQueues/include/fila2.h
+
+1458496895 source:/home/aluno/Área de Trabalho/sisop_a1/SOQueues/SOQueues/src/fila2.c
+	<stdio.h>
+	"../include/fila2.h"
+

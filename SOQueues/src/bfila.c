@@ -182,7 +182,7 @@ int	Verifica(PFILA2 fila, int value) {
 		return -1;
 	}
 	if (*p!=value) {
-		//printf ("VERIFICA %d==%d?", value, *p);
+		printf ("VERIFICA %d==%d?", value, *p);
 		return -2;
 	}
 	return 0;

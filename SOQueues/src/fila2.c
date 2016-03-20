@@ -3,6 +3,7 @@
 
 #define ERROR_EMPTY_QUEUE -1
 #define ERROR_CREATION -1
+#define ERROR_INVALID_IT -2
 
 PFILA2 globalQueue;
 
@@ -69,9 +70,50 @@ int     AppendFila2(PFILA2 pFila, void *content){
 }
 
 int     InsertAfterIteratorFila2(PFILA2 pFila, void *content){
+    if(pFila->it == NULL){
+        return ERROR_EMPTY_QUEUE;
+    }
+
+    if(pFila->it == pFila->last){
+        return AppendFila2(pFila,content);
+    }
+
+    pFila->it->next->ant = (PNODE2) malloc(sizeof(NODE2));
+    pFila->it->next->ant->ant = pFila->it;
+    pFila->it->next->ant->next = pFila->it->next;
+    pFila->it->next = pFila->it->next->ant;
+    pFila->it->next->node = content;
+
     return 0;
 }
 
 int     DeleteAtIteratorFila2(PFILA2 pFila){
+    if(pFila == NULL){
+        return ERROR_EMPTY_QUEUE;
+    }
+    else if(pFila->it == NULL){
+        return ERROR_INVALID_IT;
+    }
+    else if(pFila->first == pFila->last){
+        pFila->it = NULL;
+        pFila->first = NULL;
+        pFila->last = NULL;
+    }
+    else if(pFila->it == pFila->last){
+        pFila->it = pFila->it->ant;
+        free(pFila->it->next);
+        pFila->last = pFila->it;
+    }
+    else if(pFila->it == pFila->first){
+        pFila->it = pFila->it->next;
+        free(pFila->it->ant);
+        pFila->first = pFila->it;
+    }
+    else {
+        pFila->it = pFila->it->next;
+        pFila->it->ant->ant->next = pFila->it;
+        free(pFila->it->ant);
+        pFila->it->ant = pFila->it->ant->ant;
+    }
     return 0;
 }
